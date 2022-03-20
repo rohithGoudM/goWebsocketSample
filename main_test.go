@@ -19,6 +19,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
+	"log"
 
 	"github.com/gorilla/websocket"
 )
@@ -28,6 +29,7 @@ func TestSocketHandler(t *testing.T) {
 	defer server.Close()
 	dialer := websocket.Dialer{}
 
+	log.Println(server.Listener.Addr().String())
 	conn, resp, err := dialer.Dial("ws://"+server.Listener.Addr().String()+"/ws", nil)
 	if err != nil {
 		t.Fatal(err)
